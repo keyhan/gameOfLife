@@ -17,7 +17,7 @@ class LifeEngineTest {
         for (int z = 0; z < 10; z++) {
             StringBuilder str = new StringBuilder();
 
-            nextGeneration = LifeEngine.calculateNextGeneration(nextGeneration);
+            nextGeneration = LifeEngine.getNextGeneration(nextGeneration);
             str.append("\n");
             for (int i = 0; i < 5; i++) {
                 for (int j = 0; j < 5; j++) {
@@ -38,7 +38,7 @@ class LifeEngineTest {
         initBord[2] = new int[] {0, 1 ,1 ,0};
         initBord[3] = new int[] {0, 0 ,0 ,0};
         Assertions.assertThrows(IllegalStateException.class, () ->
-            LifeEngine.calculateNextGeneration(initBord));
+            LifeEngine.getNextGeneration(initBord));
     }
 
     @Test
@@ -48,7 +48,7 @@ class LifeEngineTest {
         initBord[1] = new int[] {0, 1 ,1 ,0};
         initBord[2] = new int[] {0, 1 ,1 ,0};
         initBord[3] = new int[] {0, 0 ,0 ,0};
-        int[][] nextGeneration = LifeEngine.calculateNextGeneration(initBord);
+        int[][] nextGeneration = LifeEngine.getNextGeneration(initBord);
         Assertions.assertArrayEquals(initBord, nextGeneration);
     }
 
@@ -60,7 +60,7 @@ class LifeEngineTest {
         initBord[2] = new int[] {0, 1 ,0 ,0 ,1, 0};
         initBord[3] = new int[] {0, 0 ,1 ,1 ,0, 0};
         initBord[4] = new int[] {0, 0 ,0 ,0 ,0, 0};
-        int[][] nextGeneration = LifeEngine.calculateNextGeneration(initBord);
+        int[][] nextGeneration = LifeEngine.getNextGeneration(initBord);
         Assertions.assertArrayEquals(initBord, nextGeneration);
     }
 
@@ -73,7 +73,7 @@ class LifeEngineTest {
         initBord[3] = new int[] {0, 0 ,1 ,0 ,1, 0};
         initBord[4] = new int[] {0, 0 ,0 ,1 ,0, 0};
         initBord[5] = new int[] {0, 0 ,0 ,0 ,0, 0};
-        int[][] nextGeneration = LifeEngine.calculateNextGeneration(initBord);
+        int[][] nextGeneration = LifeEngine.getNextGeneration(initBord);
         Assertions.assertArrayEquals(initBord, nextGeneration);
     }
 
@@ -85,7 +85,7 @@ class LifeEngineTest {
         initBord[2] = new int[] {0, 1 ,0 ,1 ,0};
         initBord[3] = new int[] {0, 0 ,1 ,0 ,0};
         initBord[4] = new int[] {0, 0 ,0 ,0 ,0};
-        int[][] nextGeneration = LifeEngine.calculateNextGeneration(initBord);
+        int[][] nextGeneration = LifeEngine.getNextGeneration(initBord);
         Assertions.assertArrayEquals(initBord, nextGeneration);
     }
 
@@ -105,10 +105,10 @@ class LifeEngineTest {
         secondBord[3] = new int[] {0, 0 ,0 ,0 ,0};
         secondBord[4] = new int[] {0, 0 ,0 ,0 ,0};
 
-        int[][] nextGeneration = LifeEngine.calculateNextGeneration(firstBord);
+        int[][] nextGeneration = LifeEngine.getNextGeneration(firstBord);
         Assertions.assertArrayEquals(secondBord, nextGeneration);
 
-        nextGeneration = LifeEngine.calculateNextGeneration(secondBord);
+        nextGeneration = LifeEngine.getNextGeneration(secondBord);
         Assertions.assertArrayEquals(firstBord, nextGeneration);
 
     }
@@ -131,10 +131,10 @@ class LifeEngineTest {
         secondBord[4] = new int[] {0, 0 ,1 ,0 ,0, 0};
         secondBord[5] = new int[] {0, 0 ,0 ,0 ,0, 0};
 
-        int[][] nextGeneration = LifeEngine.calculateNextGeneration(firstBord);
+        int[][] nextGeneration = LifeEngine.getNextGeneration(firstBord);
         Assertions.assertArrayEquals(secondBord, nextGeneration);
 
-        nextGeneration = LifeEngine.calculateNextGeneration(secondBord);
+        nextGeneration = LifeEngine.getNextGeneration(secondBord);
         Assertions.assertArrayEquals(firstBord, nextGeneration);
     }
 
@@ -156,10 +156,10 @@ class LifeEngineTest {
         secondBord[4] = new int[] {0, 0 ,0 ,1 ,1, 0};
         secondBord[5] = new int[] {0, 0 ,0 ,0 ,0, 0};
 
-        int[][] nextGeneration = LifeEngine.calculateNextGeneration(firstBord);
+        int[][] nextGeneration = LifeEngine.getNextGeneration(firstBord);
         Assertions.assertArrayEquals(secondBord, nextGeneration);
 
-        nextGeneration = LifeEngine.calculateNextGeneration(secondBord);
+        nextGeneration = LifeEngine.getNextGeneration(secondBord);
         Assertions.assertArrayEquals(firstBord, nextGeneration);
     }
 

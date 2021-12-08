@@ -10,14 +10,19 @@ public class Game extends JFrame{
     }
 
     private GameState gameState;
-    JButton startButton = new JButton("Start");
-    JButton stopButton = new JButton("Stop");
+    private final static String PLAY_SYMBOL = new String(Character.toChars(9654));
+    private final static String PAUSE_SYMBOL = new String(Character.toChars(9208));
+
+    JButton startButton = new JButton(PLAY_SYMBOL);
+    JButton stopButton = new JButton(PAUSE_SYMBOL);
 
     public Game() {
         super("Game Of Life!");
         BorderLayout borderLayout = new BorderLayout();
         JPanel buttonPanel = new JPanel();
         FlowLayout flowLayout = new FlowLayout();
+        startButton.setFont(new Font("Segoe", Font.PLAIN, 40));
+        stopButton.setFont(new Font("Segoe", Font.PLAIN, 40));
         buttonPanel.setLayout(flowLayout);
         buttonPanel.add(startButton);
         buttonPanel.add(stopButton);

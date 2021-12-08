@@ -2,9 +2,10 @@ package io.github.keyhan.gameoflife.engine;
 
 import java.util.Random;
 
+
 public class LifeEngine {
 
-    public static int [][] initBoard(int rows, int columns) {
+    public static int [][] seedSystem(int rows, int columns) {
         Random random = new Random();
         int[][] startBoard = new int[rows][columns];
         for (int i = 0; i < rows; i++) {
@@ -15,7 +16,7 @@ public class LifeEngine {
         return startBoard;
     }
 
-    public static int [][] calculateNextGeneration(int [][] board) {
+    public static int [][] getNextGeneration(int [][] board) {
         int[][] nextBoard = new int [board.length][];
         for(int i = 0; i < board.length; i++) {
             nextBoard[i] = new int[board[i].length];

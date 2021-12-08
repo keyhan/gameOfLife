@@ -11,10 +11,11 @@ import java.util.Arrays;
 
 public class Board implements ActionListener{
 
+    private static final String ORGANISM = new String(Character.toChars(10084));
+    private static final String EMPTY_CELL = " ";
     // controls the size of the board
-    public static final int TILE_SIZE = 50;
-    public static final int ROWS = 12;
-    public static final int COLUMNS = 18;
+    public static final int ROWS = 70;
+    public static final int COLUMNS = 70;
 
     private int[][] boardValues;
     
@@ -30,7 +31,7 @@ public class Board implements ActionListener{
    private final JTable gameTable;
 
     public Board() {
-        boardValues = LifeEngine.initBoard(ROWS, COLUMNS);
+        boardValues = LifeEngine.seedSystem(COLUMNS, ROWS);
         String[][] stringBoard = convertToString(boardValues);
         tableModel = new DefaultTableModel(stringBoard, createTitle(stringBoard));
         gameTable = new JTable(tableModel);
@@ -42,7 +43,7 @@ public class Board implements ActionListener{
 
 
         // controls the refresh rate
-        int DELAY = 1000;
+        int DELAY = 100;
         timer = new Timer(DELAY, this);
 
     }
@@ -56,7 +57,7 @@ public class Board implements ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent e) { //Updates the board after each interval
-        boardValues = LifeEngine.calculateNextGeneration(boardValues);
+        boardValues = LifeEngine.getNextGeneration(boardValues);
         String[][] stringBoard = convertToString(boardValues);
         for(int i = 0; i < stringBoard.length; i++) {
             for (int j = 0; j < stringBoard[i].length; j++) {
@@ -73,9 +74,9 @@ public class Board implements ActionListener{
         for(int i = 0; i < intValues.length; i++) {
             for(int j = 0; j < intValues[i].length; j++) {
                 if(intValues[i][j] == 0) {
-                    stringValues[i][j] = " ";
+                    stringValues[i][j] = EMPTY_CELL;
                 } else {
-                    stringValues[i][j] = new String(Character.toChars(10084));
+                    stringValues[i][j] = ORGANISM;
                 }
             }
         }
