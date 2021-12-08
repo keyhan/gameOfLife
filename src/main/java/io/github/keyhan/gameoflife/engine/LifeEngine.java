@@ -27,22 +27,26 @@ public class LifeEngine {
                     throw new IllegalStateException(String.format("Cell %s,%s has illegal value: %s", i, j, board[i][j]));
                 }
                 int sumOfNeighbours = getSumOfNeighboursForPosition(board, i, j);
-                if(board[i][j] == 1) { //living cell
-                    if (sumOfNeighbours < 2 || sumOfNeighbours > 3) {
-                        nextBoard [i][j] = 0;
-                    } else {
-                        nextBoard [i][j] = 1;
-                    }
-                } else if(board[i][j] == 0) { //non-living cell
-                    if (sumOfNeighbours == 3) {
-                        nextBoard [i][j] = 1;
-                    } else {
-                        nextBoard [i][j] = 0;
-                    }
-                }
+                nextBoard[i][j] = getNextValue(board[i][j], sumOfNeighbours);
             }
         }
         return nextBoard;
+    }
+
+    private static int getNextValue(int currentValue, int sumOfNeighbours) {
+        if(currentValue == 1) { //living cell
+            if (sumOfNeighbours < 2 || sumOfNeighbours > 3) {
+                return 0;
+            } else {
+                return 1;
+            }
+        } else { //non-living cell
+            if (sumOfNeighbours == 3) {
+                return 1;
+            } else {
+                return 0;
+            }
+        }
     }
 
     private static int getSumOfNeighboursForPosition(int[][] board, int i, int j) {
