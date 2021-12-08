@@ -5,14 +5,12 @@ import lombok.Getter;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Arrays;
 
 public class Board implements ActionListener{
 
-    // controls the delay between each tick in ms
-    private final int DELAY = 1000;
     //private final int DELAY = 25;
     // controls the size of the board
     public static final int TILE_SIZE = 50;
@@ -28,13 +26,13 @@ public class Board implements ActionListener{
     // keep a reference to the timer object that triggers actionPerformed() in
     // case we need access to it in another method
    @Getter
-    private Timer timer;
+    private final Timer timer;
 
 
-    private DefaultTableModel tableModel = new DefaultTableModel();
+    private final DefaultTableModel tableModel;
 
    @Getter
-   private JTable gameTable;
+   private final JTable gameTable;
 
     public Board() {
         //super(data, titles);
@@ -55,6 +53,8 @@ public class Board implements ActionListener{
 //             tableModel.setValueAt(stringBoard[i][j], i ,j);
 //            }
 //        }
+        // controls the delay between each tick in ms
+        int DELAY = 1000;
         timer = new Timer(DELAY, this);
         //timer.start();
 
@@ -118,7 +118,7 @@ public class Board implements ActionListener{
                 if(intValues[i][j] == 0) {
                     stringValues[i][j] = " ";
                 } else {
-                    stringValues[i][j] = "X";
+                    stringValues[i][j] = new String(Character.toChars(10084));
                 }
             }
         }
