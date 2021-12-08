@@ -14,15 +14,14 @@ public class Board implements ActionListener{
     private static final String ORGANISM = new String(Character.toChars(10084));
     private static final String EMPTY_CELL = " ";
     // controls the size of the board
-    public static final int ROWS = 70;
-    public static final int COLUMNS = 70;
+    public static final int ROWS = 50;
+    public static final int COLUMNS = 50;
 
     private int[][] boardValues;
     
-    // keep a reference to the timer object that triggers actionPerformed() in
-    // case we need access to it in another method
-   @Getter
-    private final Timer timer;
+    // keep a reference to the timer object that triggers actionPerformed() but also accessed
+    // to start and pause the game
+    private Timer timer;
 
 
     private final DefaultTableModel tableModel;
@@ -33,7 +32,7 @@ public class Board implements ActionListener{
     public Board() {
         boardValues = LifeEngine.seedSystem(COLUMNS, ROWS);
         String[][] stringBoard = convertToString(boardValues);
-        tableModel = new DefaultTableModel(stringBoard, createTitle(stringBoard));
+        tableModel = new DefaultTableModel(stringBoard, createEmptyTitleForBoard(stringBoard));
         gameTable = new JTable(tableModel);
         int index = 0;
         while (index < gameTable.getColumnModel().getColumnCount()) {
@@ -41,14 +40,19 @@ public class Board implements ActionListener{
             ++index;
         }
 
-
-        // controls the refresh rate
-        int DELAY = 100;
-        timer = new Timer(DELAY, this);
-
     }
 
-    private String[] createTitle(String[][] stringBoard) {
+    public void playGame(int delay) {
+        timer = new Timer(delay, this);
+        timer.start();
+    }
+
+    public void pauseGame() {
+        timer.stop();
+    }
+
+
+    private String[] createEmptyTitleForBoard(String[][] stringBoard) {
         String[] titles = new String[stringBoard[0].length];
         Arrays.fill(titles, "");
         return titles;

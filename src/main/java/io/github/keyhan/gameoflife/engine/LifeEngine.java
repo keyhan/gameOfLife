@@ -10,7 +10,7 @@ public class LifeEngine {
         int[][] startBoard = new int[rows][columns];
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < columns; j++) {
-                startBoard[i][j] = random.nextInt(2);
+                startBoard[i][j] = random.nextInt(100) > 10 ? 0 : 1;
             }
         }
         return startBoard;

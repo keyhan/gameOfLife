@@ -5,8 +5,8 @@ import org.junit.jupiter.api.Test;
 
 class LifeEngineTest {
 
-    //@Test
-    public void testLife() throws Exception {
+    //@Test Keeping this for manual testing
+    public void testLife() {
         int[][] initBord = new int[5][5];
         initBord[0] = new int[] {1, 0 ,0 ,1 ,1};
         initBord[1] = new int[] {0, 1 ,1 ,0 ,0};
@@ -25,13 +25,13 @@ class LifeEngineTest {
                 }
                 str.append("\n");
             }
-            System.out.println("nextGeneration = " + str.toString());
+            System.out.println("nextGeneration = " + str);
         }
 
     }
 
     @Test
-    public void testFaultyBoard() throws Exception {
+    public void testFaultyBoard() {
         int[][] initBord = new int[4][4];
         initBord[0] = new int[] {0, 0 ,0 ,0};
         initBord[1] = new int[] {0, 2 ,1 ,0};
@@ -42,7 +42,7 @@ class LifeEngineTest {
     }
 
     @Test
-    public void testBlock() throws Exception {
+    public void testBlock() {
         int[][] initBord = new int[4][4];
         initBord[0] = new int[] {0, 0 ,0 ,0};
         initBord[1] = new int[] {0, 1 ,1 ,0};
@@ -53,7 +53,7 @@ class LifeEngineTest {
     }
 
     @Test
-    public void testBeehive() throws Exception {
+    public void testBeehive() {
         int[][] initBord = new int[5][6];
         initBord[0] = new int[] {0, 0 ,0 ,0 ,0, 0};
         initBord[1] = new int[] {0, 0 ,1 ,1 ,0, 0};
@@ -65,7 +65,7 @@ class LifeEngineTest {
     }
 
     @Test
-    public void testLoaf() throws Exception {
+    public void testLoaf() {
         int[][] initBord = new int[6][6];
         initBord[0] = new int[] {0, 0 ,0 ,0 ,0, 0};
         initBord[1] = new int[] {0, 0 ,1 ,1 ,0, 0};
@@ -78,7 +78,7 @@ class LifeEngineTest {
     }
 
     @Test
-    public void testBoat() throws Exception {
+    public void testBoat() {
         int[][] initBord = new int[5][5];
         initBord[0] = new int[] {0, 0 ,0 ,0 ,0};
         initBord[1] = new int[] {0, 1 ,1 ,0 ,0};
@@ -90,7 +90,7 @@ class LifeEngineTest {
     }
 
     @Test
-    public void testBlinker() throws Exception {
+    public void testBlinker() {
         int[][] firstBord = new int[5][5];
         firstBord[0] = new int[] {0, 0 ,0 ,0 ,0};
         firstBord[1] = new int[] {0, 0 ,1 ,0 ,0};
@@ -114,7 +114,7 @@ class LifeEngineTest {
     }
 
     @Test
-    public void testToad() throws Exception {
+    public void testToad() {
         int[][] firstBord = new int[6][6];
         firstBord[0] = new int[] {0, 0 ,0 ,0 ,0, 0};
         firstBord[1] = new int[] {0, 0 ,0 ,0 ,0, 0};
@@ -139,7 +139,7 @@ class LifeEngineTest {
     }
 
     @Test
-    public void testBeacon() throws Exception {
+    public void testBeacon() {
         int[][] firstBord = new int[6][6];
         firstBord[0] = new int[] {0, 0 ,0 ,0 ,0, 0};
         firstBord[1] = new int[] {0, 1 ,1 ,0 ,0, 0};
