@@ -11,15 +11,10 @@ import java.util.Arrays;
 
 public class Board implements ActionListener{
 
-    //private final int DELAY = 25;
     // controls the size of the board
     public static final int TILE_SIZE = 50;
     public static final int ROWS = 12;
     public static final int COLUMNS = 18;
-    // controls how many coins appear on the board
-    public static final int NUM_COINS = 5;
-    // suppress serialization warning
-    private static final long serialVersionUID = 490905409104883233L;
 
     private int[][] boardValues;
     
@@ -35,10 +30,8 @@ public class Board implements ActionListener{
    private final JTable gameTable;
 
     public Board() {
-        //super(data, titles);
         boardValues = LifeEngine.initBoard(ROWS, COLUMNS);
         String[][] stringBoard = convertToString(boardValues);
-        //gameTable = new JTable(stringBoard, createTitle(stringBoard));
         tableModel = new DefaultTableModel(stringBoard, createTitle(stringBoard));
         gameTable = new JTable(tableModel);
         int index = 0;
@@ -48,33 +41,11 @@ public class Board implements ActionListener{
         }
 
 
-//        for(int i = 0; i < stringBoard.length; i++) {
-//            for (int j = 0; j < stringBoard[i].length; j++) {
-//             tableModel.setValueAt(stringBoard[i][j], i ,j);
-//            }
-//        }
-        // controls the delay between each tick in ms
+        // controls the refresh rate
         int DELAY = 1000;
         timer = new Timer(DELAY, this);
-        //timer.start();
 
     }
-
-//    public Board() {
-//        // set the game board size
-//        setPreferredSize(new Dimension(TILE_SIZE * COLUMNS, TILE_SIZE * ROWS));
-//        // set the game board background color
-//        setBackground(new Color(232, 232, 232));
-//
-//        // initialize the game state
-//        boardValues = LifeEngine.initBoard(ROWS, COLUMNS);
-//        String[][] stringBoard = convertToString(boardValues);
-//
-//
-//        // this timer will call the actionPerformed() method every DELAY ms
-//        timer = new Timer(DELAY, this);
-//        timer.start();
-//    }
 
     private String[] createTitle(String[][] stringBoard) {
         String[] titles = new String[stringBoard[0].length];
@@ -82,33 +53,19 @@ public class Board implements ActionListener{
         return titles;
     }
 
-//    @Override
-//    public void mouseClicked(MouseEvent e) {
-//        int row = this.rowAtPoint(e.getPoint());
-//        int col = this.columnAtPoint(e.getPoint());
-//    }
-
 
     @Override
-    public void actionPerformed(ActionEvent e) {
-//    public void updateTable() {
-        //refresh Table
+    public void actionPerformed(ActionEvent e) { //Updates the board after each interval
         boardValues = LifeEngine.calculateNextGeneration(boardValues);
         String[][] stringBoard = convertToString(boardValues);
-//        for(int i = 0; i < stringBoard.length; i++) {
-//            tableModel.insertRow(i, stringBoard[i]);
-//        }
         for(int i = 0; i < stringBoard.length; i++) {
             for (int j = 0; j < stringBoard[i].length; j++) {
                 tableModel.setValueAt(stringBoard[i][j], i ,j);
             }
         }
-        //gameTable = new JTable(stringBoard, createTitle(stringBoard));
-
-        //gameTable.repaint();
     }
 
-    private String[][] convertToString(int [][] intValues) {
+    String[][] convertToString(int [][] intValues) {
         String[][] stringValues = new String[intValues.length][];
         for(int i = 0; i < intValues.length; i++) {
             stringValues[i] = new String[intValues[i].length];

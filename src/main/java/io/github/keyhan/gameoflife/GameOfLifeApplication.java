@@ -11,8 +11,6 @@ public class GameOfLifeApplication {
         SpringApplication.run(GameOfLifeApplication.class, args);
         System.setProperty("java.awt.headless", "false");
         new Game();
-
-
     }
 
 }

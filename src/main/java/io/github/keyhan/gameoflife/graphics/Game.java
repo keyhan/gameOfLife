@@ -12,7 +12,6 @@ public class Game extends JFrame{
     private GameState gameState;
     JButton startButton = new JButton("Start");
     JButton stopButton = new JButton("Stop");
-    JButton clearButton = new JButton("Clear");
 
     public Game() {
         super("Game Of Life!");
@@ -28,12 +27,10 @@ public class Game extends JFrame{
         startButton.addActionListener(e -> {
             if (this.gameState == GameState.STOPPED) {
                 this.gameState = GameState.STARTED;
-                //board.updateTable();
-                //updateScreen();
-
+                // Begin a timer which each second updates the board
                 board.getTimer().start();
-                // Begin a thread which each second updates the board
-                // Change the status so the board cannot be
+                startButton.setEnabled(false);
+                stopButton.setEnabled(true);
             }
         });
 
@@ -42,12 +39,8 @@ public class Game extends JFrame{
                 this.gameState = GameState.STOPPED;
                 // stops the timer.
                 board.getTimer().stop();
-            }
-        });
-
-        clearButton.addActionListener(e -> {
-            if (this.gameState == GameState.STOPPED) {
-                // clears the board.
+                startButton.setEnabled(true);
+                stopButton.setEnabled(false);
             }
         });
 
@@ -57,10 +50,5 @@ public class Game extends JFrame{
         this.pack();
         this.setVisible(true);
 
-
-    }
-
-    public void updateScreen() {
-        this.repaint();
     }
 }

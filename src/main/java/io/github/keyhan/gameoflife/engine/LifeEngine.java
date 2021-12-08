@@ -23,7 +23,7 @@ public class LifeEngine {
         for (int i = 0; i < board.length; i++) {
             for (int j = 0; j < board[i].length; j++) {
                 if(board[i][j] > 1 || board[i][j] < 0) {
-                    throw new IllegalStateException(String.format("Cell %s,%s has illegal value %s", i, j, board[i][j]));
+                    throw new IllegalStateException(String.format("Cell %s,%s has illegal value: %s", i, j, board[i][j]));
                 }
                 int sumOfNeighbours = getSumOfNeighboursForPosition(board, i, j);
                 if(board[i][j] == 1) { //living cell
@@ -32,7 +32,7 @@ public class LifeEngine {
                     } else {
                         nextBoard [i][j] = 1;
                     }
-                } else if(board[i][j] == 0) {
+                } else if(board[i][j] == 0) { //non-living cell
                     if (sumOfNeighbours == 3) {
                         nextBoard [i][j] = 1;
                     } else {
@@ -44,7 +44,7 @@ public class LifeEngine {
         return nextBoard;
     }
 
-    static int getSumOfNeighboursForPosition(int[][] board, int i, int j) {
+    private static int getSumOfNeighboursForPosition(int[][] board, int i, int j) {
         int sumOfNeighbours = 0;
         if (i-1 >= 0) { //add neighbours from former row
             sumOfNeighbours += board[i - 1][j];
