@@ -16,7 +16,7 @@ public class LifeEngine {
         return startBoard;
     }
 
-    public static int [][] getNextGeneration(int [][] board) {
+    public static int [][] tick(int [][] board) {
         int[][] nextBoard = new int [board.length][];
         for(int i = 0; i < board.length; i++) {
             nextBoard[i] = new int[board[i].length];

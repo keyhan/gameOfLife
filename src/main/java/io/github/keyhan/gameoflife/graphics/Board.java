@@ -61,7 +61,7 @@ public class Board implements ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent e) { //Updates the board after each interval
-        boardValues = LifeEngine.getNextGeneration(boardValues);
+        boardValues = LifeEngine.tick(boardValues);
         String[][] stringBoard = convertToString(boardValues);
         for(int i = 0; i < stringBoard.length; i++) {
             for (int j = 0; j < stringBoard[i].length; j++) {
