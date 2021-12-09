@@ -15,6 +15,7 @@ public class Board implements ActionListener{
     private static final String ORGANISM = new String(Character.toChars(0x1F37E));
     //private static final String OLD_ORGANISM = new String(Character.toChars(128293));
     private static final String OLD_ORGANISM = new String(Character.toChars(127877));
+    private static final String DEAD_ORGANISM = new String(Character.toChars(0x1F32B));
     private static final String EMPTY_CELL = " ";
     // controls the size of the board
     public static final int ROWS = 50;
@@ -86,7 +87,11 @@ public class Board implements ActionListener{
         for(int i = 0; i < intValues.length; i++) {
             for(int j = 0; j < intValues[i].length; j++) {
                 if(intValues[i][j] == 0) {
-                    stringValues[i][j] = EMPTY_CELL;
+                    if (oldValues != null && oldValues[i][j] == 1) {
+                        stringValues[i][j] = DEAD_ORGANISM;
+                    } else {
+                        stringValues[i][j] = EMPTY_CELL;
+                    }
                 } else {
                     if (oldValues!=null && oldValues[i][j] == 0) {
                         stringValues[i][j] = ORGANISM;
