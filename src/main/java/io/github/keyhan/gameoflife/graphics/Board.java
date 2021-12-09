@@ -11,7 +11,10 @@ import java.util.Arrays;
 
 public class Board implements ActionListener{
 
-    private static final String ORGANISM = new String(Character.toChars(10084));
+    //private static final String ORGANISM = new String(Character.toChars(10084));
+    private static final String ORGANISM = new String(Character.toChars(0x1F37E));
+    //private static final String OLD_ORGANISM = new String(Character.toChars(128293));
+    private static final String OLD_ORGANISM = new String(Character.toChars(127877));
     private static final String EMPTY_CELL = " ";
     // controls the size of the board
     public static final int ROWS = 50;
@@ -35,7 +38,7 @@ public class Board implements ActionListener{
 
     public void initBoard() { 
         boardValues = LifeEngine.seedSystem(COLUMNS, ROWS);
-        String[][] stringBoard = convertToString(boardValues);
+        String[][] stringBoard = convertToString(boardValues, null);
         tableModel = new DefaultTableModel(stringBoard, createEmptyTitleForBoard(stringBoard));
         gameTable = new JTable(tableModel);
         int index = 0;
@@ -65,8 +68,9 @@ public class Board implements ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent e) { //Updates the board after each interval
+        int[][] oldValues = boardValues.clone();
         boardValues = LifeEngine.tick(boardValues);
-        String[][] stringBoard = convertToString(boardValues);
+        String[][] stringBoard = convertToString(boardValues, oldValues);
         for(int i = 0; i < stringBoard.length; i++) {
             for (int j = 0; j < stringBoard[i].length; j++) {
                 tableModel.setValueAt(stringBoard[i][j], i ,j);
@@ -74,7 +78,7 @@ public class Board implements ActionListener{
         }
     }
 
-    String[][] convertToString(int [][] intValues) {
+    String[][] convertToString(int [][] intValues,int [][] oldValues) {
         String[][] stringValues = new String[intValues.length][];
         for(int i = 0; i < intValues.length; i++) {
             stringValues[i] = new String[intValues[i].length];
@@ -84,7 +88,13 @@ public class Board implements ActionListener{
                 if(intValues[i][j] == 0) {
                     stringValues[i][j] = EMPTY_CELL;
                 } else {
-                    stringValues[i][j] = ORGANISM;
+                    if (oldValues!=null && oldValues[i][j] == 0) {
+                        stringValues[i][j] = ORGANISM;
+                    } else if(oldValues != null) {
+                        stringValues[i][j] = OLD_ORGANISM;
+                    } else {
+                        stringValues[i][j] = ORGANISM;
+                    }
                 }
             }
         }
