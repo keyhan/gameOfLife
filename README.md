@@ -6,14 +6,14 @@ To play just build the game with maven command and start the application with ja
 ![img.png](img.png)
 
 There is an improvement in this version of the Conway Game Of Life.
-In this version there is a distinction between new organism (champagne bottle) nad 
-old organisms (santa). 
+In this version there is a distinction between new organisms (champagne bottle 🍾)
+and old organisms (santa 🎅). 
 
 The control below the board is as follows:
 * The combobox chooses the delay between each tick.
-* The play button starts or continues the game.
-* The pause button pauses the game.
-* The shuffle button shuffles a new game.
+* The ▶ button starts or continues the game.
+* The ⏸ button pauses the game.
+* The 🔀 (shuffle) button shuffles a new game.
 
 ## Requirements
 To be able to build and run this game you have to have JDK 11 or higher 
