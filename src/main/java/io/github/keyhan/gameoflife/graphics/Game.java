@@ -39,6 +39,7 @@ public class Game extends JFrame{
         playButton.setFont(new Font("Segoe", Font.PLAIN, 20));
         pauseButton.setFont(new Font("Segoe", Font.PLAIN, 20));
         shuffleButton.setFont(new Font("Segoe", Font.PLAIN, 20));
+        refreshRateBox.setFont(new Font("Segoe", Font.PLAIN, 20));
         Comparator<String> compByLength = Comparator.comparingInt(String::length)
                 .thenComparing(String::compareTo);
         DELAY_COMBO_MAP.keySet().stream().sorted(compByLength).forEach(refreshRateBox::addItem);
