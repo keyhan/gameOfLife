@@ -24,12 +24,16 @@ public class Board implements ActionListener{
     private Timer timer;
 
 
-    private final DefaultTableModel tableModel;
+    private DefaultTableModel tableModel;
 
    @Getter
-   private final JTable gameTable;
+   private JTable gameTable;
 
     public Board() {
+        initBoard();
+    }
+
+    public void initBoard() { 
         boardValues = LifeEngine.seedSystem(COLUMNS, ROWS);
         String[][] stringBoard = convertToString(boardValues);
         tableModel = new DefaultTableModel(stringBoard, createEmptyTitleForBoard(stringBoard));
@@ -39,7 +43,7 @@ public class Board implements ActionListener{
             gameTable.getColumnModel().getColumn(index).setMaxWidth(1);
             ++index;
         }
-
+        gameTable.repaint();
     }
 
     public void playGame(int delay) {

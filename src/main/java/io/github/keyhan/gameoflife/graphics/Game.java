@@ -14,7 +14,9 @@ public class Game extends JFrame{
     private GameState gameState;
     private final static String PLAY_SYMBOL = new String(Character.toChars(9654));
     private final static String PAUSE_SYMBOL = new String(Character.toChars(9208));
+    private final static String SHUFFLE_SYMBOL = new String(Character.toChars(128256));
 
+    private final JButton shuffleButton = new JButton(SHUFFLE_SYMBOL);
     private final JButton playButton = new JButton(PLAY_SYMBOL);
     private final JButton pauseButton = new JButton(PAUSE_SYMBOL);
     private final JComboBox<String> refreshRateBox = new JComboBox<>();
@@ -26,13 +28,18 @@ public class Game extends JFrame{
             "1000 ms", 1000
     );
 
+    private Board  board;
+    private JPanel boardPanel = new JPanel();
+    JPanel buttonPanel = new JPanel();
+    BorderLayout borderLayout = new BorderLayout();
+
     public Game() {
         super("Game Of Life!");
-        BorderLayout borderLayout = new BorderLayout();
-        JPanel buttonPanel = new JPanel();
         FlowLayout flowLayout = new FlowLayout();
         playButton.setFont(new Font("Segoe", Font.PLAIN, 20));
         pauseButton.setFont(new Font("Segoe", Font.PLAIN, 20));
+        shuffleButton.setFont(new Font("Segoe", Font.PLAIN, 20));
+        refreshRateBox.setFont(new Font("Segoe", Font.PLAIN, 20));
         Comparator<String> compByLength = Comparator.comparingInt(String::length)
                 .thenComparing(String::compareTo);
         DELAY_COMBO_MAP.keySet().stream().sorted(compByLength).forEach(refreshRateBox::addItem);
@@ -40,37 +47,57 @@ public class Game extends JFrame{
         buttonPanel.add(refreshRateBox);
         buttonPanel.add(playButton);
         buttonPanel.add(pauseButton);
-        this.setLayout(borderLayout);
+        buttonPanel.add(shuffleButton);
         this.gameState = GameState.STOPPED;
         pauseButton.setEnabled(false);
-        Board board = new Board();
         playButton.addActionListener(e -> {
             if (this.gameState == GameState.STOPPED) {
-                this.gameState = GameState.STARTED;
                 // Begin a timer which each second updates the board
                 board.playGame(DELAY_COMBO_MAP.get((String)refreshRateBox.getSelectedItem()));
                 playButton.setEnabled(false);
                 pauseButton.setEnabled(true);
                 refreshRateBox.setEnabled(false);
+                shuffleButton.setEnabled(false);
+                this.gameState = GameState.STARTED;
             }
         });
 
         pauseButton.addActionListener(e -> {
             if (this.gameState == GameState.STARTED) {
-                this.gameState = GameState.STOPPED;
                 // stops the timer.
                 board.pauseGame();
                 playButton.setEnabled(true);
                 pauseButton.setEnabled(false);
                 refreshRateBox.setEnabled(true);
+                shuffleButton.setEnabled(true);
+                this.gameState = GameState.STOPPED;
             }
         });
 
+        shuffleButton.addActionListener(e -> {
+            setupBoard();
+        });
+        setupGame();
+    }
+
+    private void setupGame(){
+        setupBoard();
+        this.setLayout(borderLayout);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.add(board.getGameTable(), BorderLayout.CENTER);
+        this.add(boardPanel, BorderLayout.CENTER);
         this.add(buttonPanel, BorderLayout.SOUTH);
         this.pack();
         this.setVisible(true);
+    }
 
+    private void setupBoard() { 
+        if (board != null) {
+            boardPanel.remove(board.getGameTable());
+        }
+        board = new Board();
+        boardPanel.add(board.getGameTable());
+        board.getGameTable().repaint();
+        boardPanel.repaint();
+        this.revalidate();
     }
 }
