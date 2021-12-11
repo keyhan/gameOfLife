@@ -29,7 +29,7 @@ public class Game extends JFrame{
     );
 
     private Board  board;
-    private JPanel boardPanel = new JPanel();
+    private final JPanel boardPanel = new JPanel();
     JPanel buttonPanel = new JPanel();
     BorderLayout borderLayout = new BorderLayout();
 
@@ -74,9 +74,7 @@ public class Game extends JFrame{
             }
         });
 
-        shuffleButton.addActionListener(e -> {
-            setupBoard();
-        });
+        shuffleButton.addActionListener(e -> setupBoard());
         setupGame();
     }
 

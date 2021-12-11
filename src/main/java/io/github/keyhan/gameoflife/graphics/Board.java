@@ -11,9 +11,7 @@ import java.util.Arrays;
 
 public class Board implements ActionListener{
 
-    //private static final String ORGANISM = new String(Character.toChars(10084));
     private static final String ORGANISM = new String(Character.toChars(0x1F37E));
-    //private static final String OLD_ORGANISM = new String(Character.toChars(128293));
     private static final String OLD_ORGANISM = new String(Character.toChars(127877));
     private static final String DEAD_ORGANISM = new String(Character.toChars(0x1F32B));
     private static final String EMPTY_CELL = " ";
