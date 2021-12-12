@@ -11,9 +11,11 @@ import java.util.Arrays;
 
 public class Board implements ActionListener{
 
-    private static final String ORGANISM = new String(Character.toChars(0x1F37E));
-    private static final String OLD_ORGANISM = new String(Character.toChars(127877));
-    private static final String DEAD_ORGANISM = new String(Character.toChars(0x1F32B));
+    private static final String OS = System.getProperty("os.name").toLowerCase();
+    public static final boolean IS_MAC = OS.contains("mac");
+    private static final String ORGANISM = IS_MAC ? "x" : new String(Character.toChars(0x1F37E));
+    private static final String OLD_ORGANISM = IS_MAC ? "X" : new String(Character.toChars(127877));
+    private static final String DEAD_ORGANISM = IS_MAC ? "." : new String(Character.toChars(0x1F32B));
     private static final String EMPTY_CELL = " ";
     // controls the size of the board
     public static final int ROWS = 50;

@@ -12,9 +12,11 @@ public class Game extends JFrame{
     }
 
     private GameState gameState;
-    private final static String PLAY_SYMBOL = new String(Character.toChars(9654));
-    private final static String PAUSE_SYMBOL = new String(Character.toChars(9208));
-    private final static String SHUFFLE_SYMBOL = new String(Character.toChars(128256));
+    private static final String OS = System.getProperty("os.name").toLowerCase();
+    public static final boolean IS_MAC = OS.contains("mac");
+    private final static String PLAY_SYMBOL = IS_MAC ? "PLAY" : new String(Character.toChars(9654));
+    private final static String PAUSE_SYMBOL = IS_MAC ? "PAUSE" : new String(Character.toChars(9208));
+    private final static String SHUFFLE_SYMBOL = IS_MAC ? "SHUFFLE" : new String(Character.toChars(128256));
 
     private final JButton shuffleButton = new JButton(SHUFFLE_SYMBOL);
     private final JButton playButton = new JButton(PLAY_SYMBOL);
