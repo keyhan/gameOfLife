@@ -1,8 +1,11 @@
 package io.github.keyhan.gameoflife.engine;
 
+import lombok.experimental.UtilityClass;
+
 import java.util.Random;
 
 
+@UtilityClass
 public class LifeEngine {
 
     public static int [][] seedSystem(int rows, int columns) {
