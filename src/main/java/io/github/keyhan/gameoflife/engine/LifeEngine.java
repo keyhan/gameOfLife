@@ -51,13 +51,21 @@ public class LifeEngine {
 
     private static int getSumOfNeighbours(int[][] board, int i, int j) {
         int sumOfNeighbours = 0;
-        if (i-1 >= 0) { //add neighbours from former row
-            sumOfNeighbours += board[i - 1][j];
-            sumOfNeighbours += getSumFromNeighbouringColumns(board, i - 1, j);
+        if ( i == 0) {
+            sumOfNeighbours += board[board.length-1][j];
+            sumOfNeighbours += getSumFromNeighbouringColumns(board,board.length - 1,j);
+        }
+        if (i == board.length -1) { //add neighbours from next row
+            sumOfNeighbours += board[0][j];
+            sumOfNeighbours += getSumFromNeighbouringColumns(board,0,j);
         }
         if (i+1 < board.length) { //add neighbours from next row
             sumOfNeighbours += board[i + 1][j];
             sumOfNeighbours += getSumFromNeighbouringColumns(board, i + 1, j);
+        }
+        if (i-1 >= 0) { //add neighbours from former row
+            sumOfNeighbours += board[i - 1][j];
+            sumOfNeighbours += getSumFromNeighbouringColumns(board, i - 1, j);
         }
         sumOfNeighbours += getSumFromNeighbouringColumns(board, i, j);
         return sumOfNeighbours;
@@ -65,6 +73,12 @@ public class LifeEngine {
 
     private static int getSumFromNeighbouringColumns(int[][] board, int i, int j) {
         int sumOfNeighbours = 0;
+        if (j == 0) {
+            sumOfNeighbours += board[i][board[i].length - 1];
+        }
+        if (j == board[i].length - 1) {
+            sumOfNeighbours += board[i][0];
+        }
         if (j -1 >= 0) { //add neighbour before
             sumOfNeighbours += board[i][j - 1];
         }
