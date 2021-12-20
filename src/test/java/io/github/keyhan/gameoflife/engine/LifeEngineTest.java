@@ -28,7 +28,7 @@ class LifeEngineTest {
         for (int z = 0; z < 10; z++) {
             StringBuilder str = new StringBuilder();
 
-            nextGeneration = LifeEngine.tick(nextGeneration,5,5);
+            nextGeneration = LifeEngine.tick(nextGeneration,10,10);
 //            str.append("\n");
 //            for (int i = 0; i < 5; i++) {
 //                for (int j = 0; j < 5; j++) {
@@ -50,7 +50,7 @@ class LifeEngineTest {
                 new Organism(2, 1),
                 new Organism(2, 2)
                 );
-        Set<Organism> nextGeneration = LifeEngine.tick(initBoard,3,3);
+        Set<Organism> nextGeneration = LifeEngine.tick(initBoard,5,5);
         Assertions.assertEquals(initBoard, nextGeneration);
     }
 
@@ -64,7 +64,7 @@ class LifeEngineTest {
                 new Organism(3, 2),
                 new Organism(3, 3)
         );
-        Set<Organism> nextGeneration = LifeEngine.tick(initBoard,5,5);
+        Set<Organism> nextGeneration = LifeEngine.tick(initBoard,6,6);
         Assertions.assertEquals(initBoard, nextGeneration);
     }
 
@@ -79,7 +79,7 @@ class LifeEngineTest {
                 new Organism(3, 4),
                 new Organism(4, 3)
         );
-        Set<Organism> nextGeneration = LifeEngine.tick(initBoard,6,6);
+        Set<Organism> nextGeneration = LifeEngine.tick(initBoard,7,7);
         Assertions.assertEquals(initBoard, nextGeneration);
     }
 
@@ -92,7 +92,7 @@ class LifeEngineTest {
                 new Organism(2, 3),
                 new Organism(3, 2)
         );
-        Set<Organism> nextGeneration = LifeEngine.tick(initBoard,5,5);
+        Set<Organism> nextGeneration = LifeEngine.tick(initBoard,6,6);
         Assertions.assertEquals(initBoard, nextGeneration);
     }
 
