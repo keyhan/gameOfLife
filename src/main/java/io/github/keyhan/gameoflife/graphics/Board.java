@@ -1,5 +1,6 @@
 package io.github.keyhan.gameoflife.graphics;
 
+import io.github.keyhan.gameoflife.domain.Organism;
 import io.github.keyhan.gameoflife.engine.LifeEngine;
 import lombok.Getter;
 
@@ -8,6 +9,8 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Arrays;
+import java.util.List;
+import java.util.Set;
 
 public class Board implements ActionListener{
 
@@ -21,7 +24,7 @@ public class Board implements ActionListener{
     public static final int ROWS = 50;
     public static final int COLUMNS = 50;
 
-    private int[][] boardValues;
+    private Set<Organism> boardValues;
     
     // keep a reference to the timer object that triggers actionPerformed() but also accessed
     // to start and pause the game
@@ -39,7 +42,7 @@ public class Board implements ActionListener{
 
     public void initBoard() { 
         boardValues = LifeEngine.seedSystem(COLUMNS, ROWS);
-        String[][] stringBoard = convertToString(boardValues, null);
+        String[][] stringBoard = convertToString(boardValues, null, ROWS, COLUMNS);
         tableModel = new DefaultTableModel(stringBoard, createEmptyTitleForBoard(stringBoard));
         gameTable = new JTable(tableModel);
         int index = 0;
@@ -69,9 +72,9 @@ public class Board implements ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent e) { //Updates the board after each interval
-        int[][] oldValues = boardValues.clone();
-        boardValues = LifeEngine.tick(boardValues);
-        String[][] stringBoard = convertToString(boardValues, oldValues);
+        Set<Organism> oldValues = Set.copyOf(boardValues);
+        boardValues = LifeEngine.tick(boardValues, ROWS, COLUMNS);
+        String[][] stringBoard = convertToString(boardValues, oldValues, ROWS, COLUMNS);
         for(int i = 0; i < stringBoard.length; i++) {
             for (int j = 0; j < stringBoard[i].length; j++) {
                 tableModel.setValueAt(stringBoard[i][j], i ,j);
@@ -79,26 +82,22 @@ public class Board implements ActionListener{
         }
     }
 
-    String[][] convertToString(int [][] intValues,int [][] oldValues) {
-        String[][] stringValues = new String[intValues.length][];
-        for(int i = 0; i < intValues.length; i++) {
-            stringValues[i] = new String[intValues[i].length];
-        }
-        for(int i = 0; i < intValues.length; i++) {
-            for(int j = 0; j < intValues[i].length; j++) {
-                if(intValues[i][j] == 0) {
-                    if (oldValues != null && oldValues[i][j] == 1) {
-                        stringValues[i][j] = DEAD_ORGANISM;
-                    } else {
-                        stringValues[i][j] = EMPTY_CELL;
-                    }
-                } else {
-                    if (oldValues!=null && oldValues[i][j] == 0) {
-                        stringValues[i][j] = ORGANISM;
-                    } else if(oldValues != null) {
+    String[][] convertToString(Set<Organism> values,Set<Organism> oldValues, int maxCols, int maxRows) {
+        String[][] stringValues = new String[maxRows][maxCols];
+        for(int i = 0; i < maxRows; i++) {
+            for(int j = 0; j < maxCols; j++) {
+                Organism organism = new Organism(i, j);
+                if(values.contains(organism)) {
+                    if (oldValues != null && oldValues.contains(organism)) {
                         stringValues[i][j] = OLD_ORGANISM;
                     } else {
                         stringValues[i][j] = ORGANISM;
+                    }
+                } else {
+                    if (oldValues != null && oldValues.contains(organism)) {
+                        stringValues[i][j] = DEAD_ORGANISM;
+                    } else {
+                        stringValues[i][j] = EMPTY_CELL;
                     }
                 }
             }

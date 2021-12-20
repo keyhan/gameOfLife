@@ -1,7 +1,10 @@
 package io.github.keyhan.gameoflife.graphics;
 
+import io.github.keyhan.gameoflife.domain.Organism;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+
+import java.util.Set;
 
 public class BoardTest {
 
@@ -15,17 +18,18 @@ public class BoardTest {
     @Test
     public void testConvertToStringTable() {
 
-        int[][] initBord = new int[4][4];
-        initBord[0] = new int[] {0, 0 ,0 ,0};
-        initBord[1] = new int[] {0, 1 ,1 ,0};
-        initBord[2] = new int[] {0, 1 ,1 ,0};
-        initBord[3] = new int[] {0, 0 ,0 ,0};
+        Set<Organism> initBoard = Set.of(
+                new Organism(1, 1),
+                new Organism(1, 2),
+                new Organism(2, 1),
+                new Organism(2, 2)
+        );
 
-        int[][] oldBord = new int[4][4];
-        oldBord[0] = new int[] {0, 0 ,0 ,0};
-        oldBord[1] = new int[] {1, 0 ,1 ,0};
-        oldBord[2] = new int[] {0, 1 ,0 ,0};
-        oldBord[3] = new int[] {0, 0 ,0 ,0};
+        Set<Organism> oldBoard = Set.of(
+                new Organism(1, 0),
+                new Organism(1, 2),
+                new Organism(2, 1)
+        );
 
         String[][] expectedBoard = new String[4][4];
         expectedBoard[0] = new String[] {EMPTY_CELL,EMPTY_CELL,EMPTY_CELL,EMPTY_CELL};
@@ -35,7 +39,7 @@ public class BoardTest {
 
 
         Board board = new Board();
-        String[][] convertedTable = board.convertToString(initBord, oldBord);
+        String[][] convertedTable = board.convertToString(initBoard, oldBoard,4,4);
         Assertions.assertArrayEquals(convertedTable, expectedBoard);
     }
     
