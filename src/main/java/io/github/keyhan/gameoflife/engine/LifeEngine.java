@@ -49,14 +49,14 @@ public class LifeEngine {
 
     private static int getSumOfNeighbours(Set<Organism> organisms, int i, int j, int maxCols, int maxRows) {
         int sumOfNeighbours = 0;
-//        if (i == 0) {
-//            sumOfNeighbours += organisms.contains(new Organism(i, maxCols - 1)) ? 1 : 0;
-//            sumOfNeighbours += getSumFromNeighbouringColumns(organisms, maxRows - 1, j, maxCols);
-//        }
-//        if (i == maxRows - 1) { //add neighbours from next row
-//            sumOfNeighbours += organisms.contains(new Organism(0, j)) ? 1 : 0;
-//            sumOfNeighbours += getSumFromNeighbouringColumns(organisms, 0, j, maxCols);
-//        }
+        if (i == 0) {
+            sumOfNeighbours += organisms.contains(new Organism(i, maxCols - 1)) ? 1 : 0;
+            sumOfNeighbours += getSumFromNeighbouringColumns(organisms, maxRows - 1, j, maxCols);
+        }
+        if (i == maxRows - 1) { //add neighbours from next row
+            sumOfNeighbours += organisms.contains(new Organism(0, j)) ? 1 : 0;
+            sumOfNeighbours += getSumFromNeighbouringColumns(organisms, 0, j, maxCols);
+        }
         if (i + 1 < maxRows) { //add neighbours from next row
             sumOfNeighbours += organisms.contains(new Organism(i + 1, j)) ? 1 : 0;
             sumOfNeighbours += getSumFromNeighbouringColumns(organisms, i + 1, j, maxCols);
@@ -71,12 +71,12 @@ public class LifeEngine {
 
     private static int getSumFromNeighbouringColumns(Set<Organism> organisms, int i, int j, int maxCols) {
         int sumOfNeighbours = 0;
-//        if (j == 0) {
-//            sumOfNeighbours += organisms.contains(new Organism(i , maxCols - 1)) ? 1 :0;
-//        }
-//        if (j == maxCols - 1) {
-//            sumOfNeighbours += organisms.contains(new Organism(i , 0)) ? 1 :0;
-//        }
+        if (j == 0) {
+            sumOfNeighbours += organisms.contains(new Organism(i , maxCols - 1)) ? 1 :0;
+        }
+        if (j == maxCols - 1) {
+            sumOfNeighbours += organisms.contains(new Organism(i , 0)) ? 1 :0;
+        }
         if (j - 1 >= 0) { //add neighbour before
             sumOfNeighbours += organisms.contains(new Organism(i , j - 1)) ? 1 :0;
         }

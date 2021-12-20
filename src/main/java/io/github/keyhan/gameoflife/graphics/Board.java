@@ -22,7 +22,7 @@ public class Board implements ActionListener{
     private static final String EMPTY_CELL = " ";
     // controls the size of the board
     public static final int ROWS = 50;
-    public static final int COLUMNS = 50;
+    public static final int COLUMNS = 80;
 
     private Set<Organism> boardValues;
     
@@ -41,8 +41,8 @@ public class Board implements ActionListener{
     }
 
     public void initBoard() { 
-        boardValues = LifeEngine.seedSystem(COLUMNS, ROWS);
-        String[][] stringBoard = convertToString(boardValues, null, ROWS, COLUMNS);
+        boardValues = LifeEngine.seedSystem(ROWS, COLUMNS);
+        String[][] stringBoard = convertToString(boardValues, null, COLUMNS, ROWS);
         tableModel = new DefaultTableModel(stringBoard, createEmptyTitleForBoard(stringBoard));
         gameTable = new JTable(tableModel);
         int index = 0;
@@ -73,8 +73,8 @@ public class Board implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) { //Updates the board after each interval
         Set<Organism> oldValues = Set.copyOf(boardValues);
-        boardValues = LifeEngine.tick(boardValues, ROWS, COLUMNS);
-        String[][] stringBoard = convertToString(boardValues, oldValues, ROWS, COLUMNS);
+        boardValues = LifeEngine.tick(boardValues, COLUMNS, ROWS);
+        String[][] stringBoard = convertToString(boardValues, oldValues, COLUMNS, ROWS);
         for(int i = 0; i < stringBoard.length; i++) {
             for (int j = 0; j < stringBoard[i].length; j++) {
                 tableModel.setValueAt(stringBoard[i][j], i ,j);
